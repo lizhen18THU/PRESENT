@@ -1,4 +1,3 @@
-<<<<<<< HEAD
 # Cross-modality representation and multi-sample integration of spatially resolved omics data
 
 ## Overview
@@ -59,7 +58,3 @@ All the data used in the tutorial are available at [TsinghuaCloudDisk](https://c
 ## Citation
 
 Zhen Li, Xuejian Cui, Xiaoyang Chen, Zijing Gao, Yuyao Liu, Yan Pan, Shengquan Chen and Rui Jiang. "Cross-modality representation and multi-sample integration of spatially resolved omics data." Preprint at bioRxiv (2023).
-=======
-# PRESENT
-Cross-modality representation and multi-sample integration of spatially resolved omics data
->>>>>>> origin/main
