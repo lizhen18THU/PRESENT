@@ -26,6 +26,7 @@ iranges>=0.2.1
 biocutils>=0.1.3
 torch>=2.0.0
 torch-geometric>=2.3.1
+torch-sparse>=0.6.17
 ```
 
 ### Installation via pypi
