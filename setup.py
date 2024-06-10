@@ -34,9 +34,10 @@ setup(
         'iranges==0.2.1',
         'biocutils==0.1.3',
         'torch==2.0.0',
-        'torch-sparse==0.6.17@https://data.pyg.org/whl/torch-2.0.0+cu118.html',
-        'torch-cluster==1.6.1@https://data.pyg.org/whl/torch-2.0.0+cu118.html',
-        'torch-scatter==2.1.1@https://data.pyg.org/whl/torch-2.0.0+cu118.html',
-        'torch-geometric==2.3.1@https://data.pyg.org/whl/torch-2.0.0+cu118.html',
+        'torch-geometric==2.3.1',
+        'pyg_lib==0.3.0@https://data.pyg.org/whl/torch-2.0.0+cu118.html'
+        'torch_sparse==0.6.17@https://data.pyg.org/whl/torch-2.0.0+cu118.html',
+        'torch_cluster==1.6.1@https://data.pyg.org/whl/torch-2.0.0+cu118.html',
+        'torch_scatter==2.1.1@https://data.pyg.org/whl/torch-2.0.0+cu118.html',
     ],
 )
