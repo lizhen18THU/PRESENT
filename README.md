@@ -13,20 +13,22 @@ Spatially resolved sequencing technologies have revolutionized the characterizat
 
 ### Dependencies
 ```
-numpy>=1.24.4
-pandas>=2.0.3
-scipy>=1.9.3
-scikit-learn>=1.3.2
-anndata>=0.9.2
-networkx>=3.1
-scanpy>=1.9.8
-episcanpy>=0.3.2
-genomicranges>=0.4.2
-iranges>=0.2.1
-biocutils>=0.1.3
-torch>=2.0.0
-torch-geometric>=2.3.1
-torch-sparse>=0.6.17
+numpy==1.24.4
+pandas==2.0.3
+scipy==1.9.3
+scikit-learn==1.3.2
+anndata==0.9.2
+networkx==3.1
+scanpy==1.9.8
+episcanpy==0.3.2
+genomicranges==0.4.2
+iranges==0.2.1
+biocutils==0.1.3
+torch==2.0.0
+torch-sparse==0.6.17
+torch-cluster==1.6.1
+torch-scatter==2.1.1
+torch-geometric==2.3.1
 ```
 
 ### Installation via pypi
