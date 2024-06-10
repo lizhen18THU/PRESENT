@@ -11,7 +11,7 @@ Spatially resolved sequencing technologies have revolutionized the characterizat
 
 ## Installation
 
-### Dependency
+### Dependencies
 ```
 numpy>=1.24.4
 pandas>=2.0.3

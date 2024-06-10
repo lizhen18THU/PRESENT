@@ -1,5 +1,6 @@
 import argparse
 import pandas as pd
+import os
 from PRESENT import PRESENT_function, run_leiden
 
 if __name__ == '__main__':
@@ -56,6 +57,7 @@ if __name__ == '__main__':
         device = args.device
     )
 
+    os.makedirs(args.outputdir, exist_ok=True)
     adata = run_leiden(adata, n_cluster=args.nclusters, use_rep="embeddings", key_added="LeidenClusters")
 
     adata.write_h5ad(args.outputdir + "adata_output.h5ad")

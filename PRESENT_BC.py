@@ -1,6 +1,7 @@
 import argparse
 import pandas as pd
 import scanpy as sc
+import os
 from PRESENT import gene_sets_alignment, peak_sets_alignment
 from PRESENT import PRESENT_BC_function, run_leiden
 
@@ -83,6 +84,7 @@ if __name__ == '__main__':
     )
     adata = run_leiden(adata, n_cluster=args.nclusters, use_rep="embeddings", key_added="LeidenClusters")
 
+    os.makedirs(args.outputdir, exist_ok=True)
     adata.write_h5ad(args.outputdir + "adata_output.h5ad")
     pd.DataFrame(adata.X, index=adata.obs_names).to_csv(args.outputdir + "embeddings_output.csv")
     adata.obs[:, ["LeidenClusters"]].to_csv(args.outputdir + "domains_output.csv")
