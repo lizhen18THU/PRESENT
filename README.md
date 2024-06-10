@@ -9,7 +9,6 @@ Spatially resolved sequencing technologies have revolutionized the characterizat
 </div>
 
 
-
 ## Installation
 
 ### Dependency
@@ -46,7 +45,7 @@ python setup.py install
 
 ## Quick start
 
-The input should be raw count matrices of different spatial omics layers in [anndata.AnnData](https://anndata.readthedocs.io/en/latest/) format, where spatial coordinate matrix is stored in the `adata.obsm[spatial_key]` of corresponding AnnData object.
+The input of different spatial omics layers should be raw count matrices in [anndata.AnnData](https://anndata.readthedocs.io/en/latest/) format, where spatial coordinate matrix is stored in the `adata.obsm[spatial_key]` of corresponding AnnData object.
 
 ### Cross-modality representation of a single sample with PRESENT
 
@@ -117,7 +116,7 @@ If the feature sets of different samples have already been unified and the expre
 python3 PRESENT_BC.py --outputdir ./PRESENT_output --spatial_key spatial --batch_key batch --adata_rna_path_list data/adata_rna_concatnated.h5ad --gene_min_cells 1  --num_hvg 3000 --adata_atac_path_list data/adata_atac_concatnated.h5ad --peak_min_cells_fraction 0.03 --nclusters 10 
 ```
 
-### Additional explainations of the arguments of scripts PRESENT.py and PRESENT-BC.py
+### Explanations for the arguments of scripts PRESENT.py and PRESENT-BC.py
 + {--outputdir}: A path specifying where the final results are stored, default: ./PRESENT_output
 + {--spatial_key}: adata.obsm key under which to load the spatial matrix in the AnnData object, default: spatial
 + {--batch_key}: adata.obs key under which to load the batch indices in the AnnData object, default: batch
