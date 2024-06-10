@@ -25,9 +25,6 @@ genomicranges==0.4.2
 iranges==0.2.1
 biocutils==0.1.3
 torch==2.0.0
-torch-sparse==0.6.17
-torch-cluster==1.6.1
-torch-scatter==2.1.1
 torch-geometric==2.3.1
 ```
 
@@ -35,6 +32,7 @@ torch-geometric==2.3.1
 PRESENT is available on PyPI [here](https://pypi.org/project/bio-past) and can be installed via
 ```
 pip install bio-present
+pip install pyg_lib torch_sparse torch_cluster torch_scatter -f https://data.pyg.org/whl/torch-2.0.0+cu118.html
 ```
 
 ### Installation via Github
@@ -43,8 +41,8 @@ You can also install PRESENT from GitHub via
 git clone https://github.com/lizhen18THU/PRESENT.git
 cd PRESENT
 python setup.py install
+pip install pyg_lib torch_sparse torch_cluster torch_scatter -f https://data.pyg.org/whl/torch-2.0.0+cu118.html
 ```
-
 
 ## Quick start
 
