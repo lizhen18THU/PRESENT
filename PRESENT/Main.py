@@ -65,9 +65,9 @@ def PRESENT_function(
     d_lat
         The latent dimension of final embeddings
     k_neighbors
-        Number of neighbors for each spot to construct K-NN graph
+        Number of neighbors for each spot to construct graph
     epochs
-        Epochs to train the model
+        Max epochs to train the model
     lr
         Initial learning rate
     batch_size
@@ -158,13 +158,21 @@ def PRESENT_function(
         if spatial_key in adata_adt.obsm.keys(): spatial_mtx = adata_adt.obsm[spatial_key]
     assert spatial_mtx is not None, "Please provide spatial mtx in the adata_rna/adata_atac/adata_adt.obsm under spatial_key"
 
+    rna_counts=adata_rna.X if adata_rna is not None else None
+    cas_counts=adata_atac.X if adata_atac is not None else None
+    adt_counts=adata_adt.X if adata_adt is not None else None
+
+    ref_rna_counts = rdata_rna.X if rdata_rna is not None else None
+    ref_cas_counts = rdata_atac.X if rdata_atac is not None else None
+    ref_adt_counts = rdata_adt.X if rdata_adt is not None else None
+
     print("Input data has been loaded")
     model = PRESENT(rna_dim=rna_dim, cas_dim=cas_dim, adt_dim=adt_dim,
                        d_lat=d_lat, k_neighbors=k_neighbors).to(device)
     embeddings, omics_lat, omics_impute = model.model_train(spa_mat=spatial_mtx, 
-                                                            rna_counts=adata_rna.X, ref_rna_counts=rdata_rna.X, ref_rna_anno=rdata_rna_anno,
-                                                            cas_counts=adata_atac.X, ref_cas_counts=rdata_atac.X, ref_cas_anno=rdata_atac_anno,
-                                                            adt_counts=adata_adt.X, ref_adt_counts=rdata_adt.X, ref_adt_anno=rdata_adt_anno,
+                                                            rna_counts=rna_counts, ref_rna_counts=ref_rna_counts, ref_rna_anno=rdata_rna_anno,
+                                                            cas_counts=cas_counts, ref_cas_counts=ref_cas_counts, ref_cas_anno=rdata_atac_anno,
+                                                            adt_counts=adt_counts, ref_adt_counts=ref_adt_counts, ref_adt_anno=rdata_adt_anno,
                                                             impute=False,
                                                             epochs=epochs, lr=lr, batch_size=batch_size, device=device)
     adata = sc.AnnData(pd.DataFrame(embeddings, index=index), obs=adata_rna.obs.copy())
@@ -221,7 +229,7 @@ def PRESENT_BC_function(
     inter_neighbors
         Number of inter_neighbors for each spot to construct cross-sample graph
     epochs
-        Epochs to train the model
+        Max epochs to train the model
     lr
         Initial learning rate
     batch_size

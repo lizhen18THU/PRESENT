@@ -22,7 +22,7 @@ if __name__ == '__main__':
     parser.add_argument('--d_lat', type=int, default=50, help='The latent dimension of final embeddings')
     parser.add_argument('--intra_neighbors', type=int, default=6, help='Number of intra_neighbors for each spot to construct cross-sample graph')
     parser.add_argument('--inter_neighbors', type=int, default=6, help='Number of inter_neighbors for each spot to construct cross-sample graph')
-    parser.add_argument('--epochs', type=float, default=100, help='Epochs to train the model')
+    parser.add_argument('--epochs', type=float, default=100, help='Max epochs to train the model')
     parser.add_argument('--lr', type=int, default=0.001, help='Initial learning rate')
     parser.add_argument('--batch_size', type=int, default=320, help='Batch size for training')
     parser.add_argument('--device', type=str, default='cuda', help='Device used for training')
