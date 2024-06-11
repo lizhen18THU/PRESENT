@@ -178,7 +178,7 @@ def PRESENT_function(
     if adata_rna is not None:
         adata = sc.AnnData(pd.DataFrame(embeddings, index=index), obs=adata_rna.obs.copy())
     elif adata_atac is not None:
-        adata = sc.AnnData(pd.DataFrame(embeddings, index=index), obs=adata_rna.obs.copy())
+        adata = sc.AnnData(pd.DataFrame(embeddings, index=index), obs=adata_atac.obs.copy())
     else:
         adata = sc.AnnData(pd.DataFrame(embeddings, index=index), obs=adata_adt.obs.copy())
     adata.obsm["embeddings"] = embeddings
@@ -344,7 +344,7 @@ def PRESENT_BC_function(
     if adata_rna is not None:
         adata = sc.AnnData(pd.DataFrame(embeddings, index=index), obs=adata_rna.obs.copy())
     elif adata_atac is not None:
-        adata = sc.AnnData(pd.DataFrame(embeddings, index=index), obs=adata_rna.obs.copy())
+        adata = sc.AnnData(pd.DataFrame(embeddings, index=index), obs=adata_atac.obs.copy())
     else:
         adata = sc.AnnData(pd.DataFrame(embeddings, index=index), obs=adata_adt.obs.copy())
     adata.obsm["embeddings"] = embeddings
