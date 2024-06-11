@@ -57,10 +57,11 @@ if __name__ == '__main__':
         device = args.device
     )
 
+    if args.outputdir.endswith("/"): args.outputdir = args.outputdir[0:-1]
     os.makedirs(args.outputdir, exist_ok=True)
     adata = run_leiden(adata, n_cluster=args.nclusters, use_rep="embeddings", key_added="LeidenClusters")
 
-    adata.write_h5ad(args.outputdir + "adata_output.h5ad")
-    pd.DataFrame(adata.X, index=adata.obs_names).to_csv(args.outputdir + "embeddings_output.csv")
-    adata.obs[:, ["LeidenClusters"]].to_csv(args.outputdir + "domains_output.csv")
+    adata.write_h5ad(args.outputdir + "/adata_output.h5ad")
+    pd.DataFrame(adata.X, index=adata.obs_names).to_csv(args.outputdir + "/embeddings_output.csv")
+    adata.obs.loc[:, ["LeidenClusters"]].to_csv(args.outputdir + "/domains_output.csv")
     print("Joint embeddings and identified domains saved")

@@ -48,7 +48,7 @@ pip install pyg_lib==0.2.0 torch_sparse==0.6.17 torch_cluster==1.6.1 torch_scatt
 
 ## Quick start
 
-The input of different spatial omics layers should be raw count matrices in [anndata.AnnData](https://anndata.readthedocs.io/en/latest/) format, where spatial coordinate matrix is stored in the `adata.obsm[spatial_key]` of corresponding AnnData object.
+The input of different spatial omics layers should be raw count matrices in [anndata.AnnData](https://anndata.readthedocs.io/en/latest/) format, where spatial coordinate matrix is stored in the `adata.obsm[spatial_key]` of corresponding AnnData object. The output including the joint representations and the identified domains, stored in an AnnData file and two csv files.
 
 ### Cross-modality representation of a single sample with PRESENT
 
