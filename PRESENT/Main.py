@@ -175,7 +175,12 @@ def PRESENT_function(
                                                             adt_counts=adt_counts, ref_adt_counts=ref_adt_counts, ref_adt_anno=rdata_adt_anno,
                                                             impute=False,
                                                             epochs=epochs, lr=lr, batch_size=batch_size, device=device)
-    adata = sc.AnnData(pd.DataFrame(embeddings, index=index), obs=adata_rna.obs.copy())
+    if adata_rna is not None:
+        adata = sc.AnnData(pd.DataFrame(embeddings, index=index), obs=adata_rna.obs.copy())
+    elif adata_atac is not None:
+        adata = sc.AnnData(pd.DataFrame(embeddings, index=index), obs=adata_rna.obs.copy())
+    else:
+        adata = sc.AnnData(pd.DataFrame(embeddings, index=index), obs=adata_adt.obs.copy())
     adata.obsm["embeddings"] = embeddings
 
     return adata
@@ -336,7 +341,12 @@ def PRESENT_BC_function(
                                                             batch_label=batch_indices,
                                                             impute=False,
                                                             epochs=epochs, lr=lr, batch_size=batch_size, device=device)
-    adata = sc.AnnData(pd.DataFrame(embeddings, index=index), obs=adata_rna.obs.copy())
+    if adata_rna is not None:
+        adata = sc.AnnData(pd.DataFrame(embeddings, index=index), obs=adata_rna.obs.copy())
+    elif adata_atac is not None:
+        adata = sc.AnnData(pd.DataFrame(embeddings, index=index), obs=adata_rna.obs.copy())
+    else:
+        adata = sc.AnnData(pd.DataFrame(embeddings, index=index), obs=adata_adt.obs.copy())
     adata.obsm["embeddings"] = embeddings
 
     return adata
