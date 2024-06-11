@@ -32,7 +32,7 @@ torch-geometric==2.3.1
 PRESENT is available on PyPI [here](https://pypi.org/project/bio-past) and can be installed via
 ```
 pip install bio-present
-pip install pyg_lib torch_sparse torch_cluster torch_scatter -f https://data.pyg.org/whl/torch-2.0.0+cu118.html
+pip install pyg_lib==0.2.0 torch_sparse==0.6.17 torch_cluster==1.6.1 torch_scatter==2.1.1 -f https://data.pyg.org/whl/torch-2.0.0+cu118.html
 ```
 
 ### Installation via Github
@@ -41,7 +41,7 @@ You can also install PRESENT from GitHub via
 git clone https://github.com/lizhen18THU/PRESENT.git
 cd PRESENT
 python setup.py install
-pip install pyg_lib torch_sparse torch_cluster torch_scatter -f https://data.pyg.org/whl/torch-2.0.0+cu118.html
+pip install pyg_lib==0.2.0 torch_sparse==0.6.17 torch_cluster==1.6.1 torch_scatter==2.1.1 -f https://data.pyg.org/whl/torch-2.0.0+cu118.html
 ```
 
 ## Quick start
@@ -54,34 +54,34 @@ The input of different spatial omics layers should be raw count matrices in [ann
 
 Suppose we have a spatial transcriptomics data, where the RNA raw count matrix and the spatial coordinate matrix are stored in file data/adata_rna.h5ad. The command to run PRESENT model on the spatial multi-omics data is
 ```
-python3 PRESENT.py --outputdir ./PRESENT_output --spatial_key spatial --adata_rna_path data/adata_rna.h5ad --gene_min_cells 1  --num_hvg 3000 --nclusters 10
+python3 PRESENT_script.py --outputdir ./PRESENT_output --spatial_key spatial --adata_rna_path data/adata_rna.h5ad --gene_min_cells 1  --num_hvg 3000 --nclusters 10
 ```
 
 Optionally, PRESENT also can integrate reference data to address datasets with low sequencing depth and signal-to-noise ratio. Suppose the reference transcriptomic data are stored in data/rdata_rna.h5ad and the annotation is stored in the rdata_rna.obs["domains"], then the command to run PRESENT model is
 ```
-python3 PRESENT.py --outputdir ./PRESENT_output --spatial_key spatial --adata_rna_path data/adata_rna.h5ad --rdata_rna_path data/rdata_rna.h5ad --rdata_rna_anno domains --gene_min_cells 1  --num_hvg 3000 --nclusters 10
+python3 PRESENT_script.py --outputdir ./PRESENT_output --spatial_key spatial --adata_rna_path data/adata_rna.h5ad --rdata_rna_path data/rdata_rna.h5ad --rdata_rna_anno domains --gene_min_cells 1  --num_hvg 3000 --nclusters 10
 ```
 
 #### Run PRESENT on spatial ATAC-seq data
 Similarly, the command to run PRESENT model on the spatial ATAC-seq data is
 ```
-python3 PRESENT.py --outputdir ./PRESENT_output --spatial_key spatial --adata_atac_path data/adata_atac.h5ad --peak_min_cells_fraction 0.03 --nclusters 10
+python3 PRESENT_script.py --outputdir ./PRESENT_output --spatial_key spatial --adata_atac_path data/adata_atac.h5ad --peak_min_cells_fraction 0.03 --nclusters 10
 ```
 
 Optionally, 
 ```
-python3 PRESENT.py --outputdir ./PRESENT_output --spatial_key spatial --adata_atac_path data/adata_atac.h5ad --rdata_rna_path data/rdata_rna.h5ad --rdata_rna_anno domains --peak_min_cells_fraction 0.03 --nclusters 10
+python3 PRESENT_script.py --outputdir ./PRESENT_output --spatial_key spatial --adata_atac_path data/adata_atac.h5ad --rdata_rna_path data/rdata_rna.h5ad --rdata_rna_anno domains --peak_min_cells_fraction 0.03 --nclusters 10
 ```
 
 #### Run PRESENT on spatial multi-omics co-profiling data
 Suppose we have a spatial RNA-ATAC co-profiling data, where the RNA and ATAC raw count matrix are stored in paired files data/adata_rna.h5ad and data/adata_atac.h5ad.
 ```
-python3 PRESENT.py --outputdir ./PRESENT_output --spatial_key spatial --adata_rna_path data/adata_rna.h5ad --gene_min_cells 1  --num_hvg 3000 --adata_atac_path data/adata_atac.h5ad --peak_min_cells_fraction 0.03 --nclusters 10 
+python3 PRESENT_script.py --outputdir ./PRESENT_output --spatial_key spatial --adata_rna_path data/adata_rna.h5ad --gene_min_cells 1  --num_hvg 3000 --adata_atac_path data/adata_atac.h5ad --peak_min_cells_fraction 0.03 --nclusters 10 
 ```
 
 Similarly, for spatial RNA-ADT co-profiling data, the command denotes
 ```
-python3 PRESENT.py --outputdir ./PRESENT_output --spatial_key spatial --adata_rna_path data/adata_rna.h5ad --gene_min_cells 1  --num_hvg 3000 --adata_adt_path data/adata_adt.h5ad --protein_min_cells 1 --nclusters 10 
+python3 PRESENT_script.py --outputdir ./PRESENT_output --spatial_key spatial --adata_rna_path data/adata_rna.h5ad --gene_min_cells 1  --num_hvg 3000 --adata_adt_path data/adata_adt.h5ad --protein_min_cells 1 --nclusters 10 
 ```
 
 ### Multi-sample integration with PRESENT-BC
@@ -90,34 +90,34 @@ python3 PRESENT.py --outputdir ./PRESENT_output --spatial_key spatial --adata_rn
 
 Suppose we have two spatial transcriptomics samples for integrative analysis, where the two RNA raw count matrices  are stored in separated AnnData files data/adata_rna1.h5ad and data/adata_rna2.h5ad. The command to run PRESENT-BC model is
 ```
-python3 PRESENT_BC.py --outputdir ./PRESENT_output --spatial_key spatial --adata_rna_path_list data/adata_rna1.h5ad data/adata_rna2.h5ad --gene_min_cells 1  --num_hvg 3000 --nclusters 10
+python3 PRESENT_BC_script.py --outputdir ./PRESENT_output --spatial_key spatial --adata_rna_path_list data/adata_rna1.h5ad data/adata_rna2.h5ad --gene_min_cells 1  --num_hvg 3000 --nclusters 10
 ```
 If the feature sets of different samples have already been unified and the expression matrices have been concatnated into a single AnnData file data/adata_rna_concatnated.h5ad, and the batch indices are stored in 'adata_rna_concatnated.obs["batch"]', then
 ```
-python3 PRESENT_BC.py --outputdir ./PRESENT_output --spatial_key spatial --batch_key batch --adata_rna_path_list data/adata_rna_concatnated.h5ad --gene_min_cells 1  --num_hvg 3000 --nclusters 10
+python3 PRESENT_BC_script.py --outputdir ./PRESENT_output --spatial_key spatial --batch_key batch --adata_rna_path_list data/adata_rna_concatnated.h5ad --gene_min_cells 1  --num_hvg 3000 --nclusters 10
 ```
 
 #### Run PRESENT-BC for the integration of spatial ATAC-seq data
 Similarly, the command to run PRESENT-BC model for the integration of spatial ATAC-seq data is
 ```
-python3 PRESENT_BC.py --outputdir ./PRESENT_output --spatial_key spatial --adata_atac_path_list data/adata_atac1.h5ad data/adata_atac2.h5ad --peak_min_cells_fraction 0.03 --nclusters 10
+python3 PRESENT_BC_script.py --outputdir ./PRESENT_output --spatial_key spatial --adata_atac_path_list data/adata_atac1.h5ad data/adata_atac2.h5ad --peak_min_cells_fraction 0.03 --nclusters 10
 ```
 and
 ```
-python3 PRESENT_BC.py --outputdir ./PRESENT_output --spatial_key spatial --batch_key batch --adata_atac_path_list data/adata_atac_concatnated.h5ad --peak_min_cells_fraction 0.03 --nclusters 10
+python3 PRESENT_BC_script.py --outputdir ./PRESENT_output --spatial_key spatial --batch_key batch --adata_atac_path_list data/adata_atac_concatnated.h5ad --peak_min_cells_fraction 0.03 --nclusters 10
 ```
 
 #### Run PRESENT-BC for the integration of spatial multi-omics co-profiling data
 Suppose we have a spatial RNA-ATAC co-profiling data, where the RNA and ATAC raw count matrix of different samples are stored in files data/adata_rna1.h5ad, data/adata_rna2.h5ad, data/adata_atac1.h5ad and data/adata_atac2.h5ad. Then
 ```
-python3 PRESENT_BC.py --outputdir ./PRESENT_output --spatial_key spatial --adata_rna_path_list data/adata_rna1.h5ad data/adata_rna2.h5ad --gene_min_cells 1  --num_hvg 3000 --adata_atac_path_list data/adata_atac1.h5ad data/adata_atac2.h5ad --peak_min_cells_fraction 0.03 --nclusters 10 
+python3 PRESENT_BC_script.py --outputdir ./PRESENT_output --spatial_key spatial --adata_rna_path_list data/adata_rna1.h5ad data/adata_rna2.h5ad --gene_min_cells 1  --num_hvg 3000 --adata_atac_path_list data/adata_atac1.h5ad data/adata_atac2.h5ad --peak_min_cells_fraction 0.03 --nclusters 10 
 ```
 If the feature sets of different samples have already been unified and the expression matrices of each omics layer have been concatnated into a single AnnData file, then
 ```
-python3 PRESENT_BC.py --outputdir ./PRESENT_output --spatial_key spatial --batch_key batch --adata_rna_path_list data/adata_rna_concatnated.h5ad --gene_min_cells 1  --num_hvg 3000 --adata_atac_path_list data/adata_atac_concatnated.h5ad --peak_min_cells_fraction 0.03 --nclusters 10 
+python3 PRESENT_BC_script.py --outputdir ./PRESENT_output --spatial_key spatial --batch_key batch --adata_rna_path_list data/adata_rna_concatnated.h5ad --gene_min_cells 1  --num_hvg 3000 --adata_atac_path_list data/adata_atac_concatnated.h5ad --peak_min_cells_fraction 0.03 --nclusters 10 
 ```
 
-### Explanations for the arguments of scripts PRESENT.py and PRESENT-BC.py
+### Explanations for the arguments of scripts PRESENT_script.py and PRESENT-BC.py
 + {--outputdir}: A path specifying where the final results are stored, default: ./PRESENT_output
 + {--spatial_key}: adata.obsm key under which to load the spatial matrix in the AnnData object, default: spatial
 + {--batch_key}: adata.obs key under which to load the batch indices in the AnnData object, default: batch
