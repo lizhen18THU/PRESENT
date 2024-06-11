@@ -17,6 +17,8 @@ numpy==1.24.4
 pandas==2.0.3
 scipy==1.9.3
 scikit-learn==1.3.2
+louvain==0.8.0,
+leidenalg==0.9.1,
 anndata==0.9.2
 networkx==3.1
 scanpy==1.9.8

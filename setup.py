@@ -2,7 +2,7 @@ from setuptools import setup, find_packages
 
 setup(
     name = "bio-present",
-    version = "0.0.13",
+    version = "0.0.14",
     keywords = ["pip", "present", "spatial omics"],
     description = "Cross-modality representation and multi-sample integration of spatially resolved omics data",
     long_description = "Spatially resolved sequencing technologies have revolutionized the characterization of biological regulatory processes within microenvironment by simultaneously accessing the states of genomic regions, genes and proteins, along with the spatial coordinates of cells, necessitating advanced computational methods for the cross-modality and multi-sample integrated analysis of spatial omics datasets. To address this gap, we propose PRESENT, an effective and scalable contrastive learning framework, for the cross-modality representation of spatially resolved omics data. Through comprehensive experiments on massive spatially resolved datasets, PRESENT achieves superior performance across various species, tissues, and sequencing technologies, including spatial epigenomics, transcriptomics, and multi-omics. Specifically, PRESENT empowers the incorporation of spatial dependency and complementary omics information simultaneously, facilitating the detection of spatial domains and uncovering biological regulatory mechanisms within microenvironment. Furthermore, PRESENT can be extended to the integrative analysis of horizontal and vertical samples across different dissected regions or developmental stages, thereby promoting the identification of hierarchical structures from a spatiotemporal perspective.",
@@ -24,6 +24,8 @@ setup(
     install_requires=[
         'numpy==1.24.4',
         'pandas==2.0.3',
+        'louvain==0.8.0',
+        'leidenalg==0.9.1',
         'scipy==1.9.3',
         'scikit-learn==1.3.2',
         'anndata==0.9.2',
