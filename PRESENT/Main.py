@@ -22,6 +22,7 @@ def PRESENT_function(
         peak_min_cells_fraction: float = 0.03,
         protein_min_cells: int = 1,
         num_hvg: int = 3000,
+        nclusters: int = 10,
         d_lat: int = 50,
         k_neighbors: int = 6,
         epochs: int = 100,
@@ -62,6 +63,8 @@ def PRESENT_function(
         Minimum number of cells expressed required for a protein to pass filtering
     num_hvg
         Number of highly variable genes to select for RNA data
+    nclusters
+        Number of spatial clusters
     d_lat
         The latent dimension of final embeddings
     k_neighbors
@@ -182,7 +185,7 @@ def PRESENT_function(
     else:
         adata = sc.AnnData(pd.DataFrame(embeddings, index=index), obs=adata_adt.obs.copy())
     adata.obsm["embeddings"] = embeddings
-
+    adata = run_leiden(adata, n_cluster=nclusters, use_rep="embeddings", key_added="LeidenClusters")
     return adata
 
 
@@ -196,6 +199,7 @@ def PRESENT_BC_function(
         peak_min_cells_fraction: Union[float, NoneType] = 0.03,
         protein_min_cells: Union[int, NoneType] = 1,
         num_hvg: int = 3000,
+        nclusters: int = 10,
         d_lat: int = 50,
         intra_neighbors: int = 6,
         inter_neighbors: int = 6,
@@ -229,6 +233,8 @@ def PRESENT_BC_function(
         Number of highly variable genes to select for RNA data
     d_lat
         The latent dimension of final embeddings
+    nclusters
+        Number of spatial clusters
     intra_neighbors
         Number of intra_neighbors for each spot to construct cross-sample graph
     inter_neighbors
@@ -348,5 +354,6 @@ def PRESENT_BC_function(
     else:
         adata = sc.AnnData(pd.DataFrame(embeddings, index=index), obs=adata_adt.obs.copy())
     adata.obsm["embeddings"] = embeddings
+    adata = run_leiden(adata, n_cluster=nclusters, use_rep="embeddings", key_added="LeidenClusters")
 
     return adata

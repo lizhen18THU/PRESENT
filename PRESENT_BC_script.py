@@ -74,6 +74,7 @@ if __name__ == '__main__':
         peak_min_cells_fraction = args.peak_min_cells_fraction,
         protein_min_cells = args.protein_min_cells,
         num_hvg = args.num_hvg,
+        nclusters = args.nclusters,
         d_lat = args.d_lat,
         intra_neighbors = args.intra_neighbors,
         inter_neighbors = args.inter_neighbors,
@@ -84,7 +85,6 @@ if __name__ == '__main__':
     )
     if args.outputdir.endswith("/"): args.outputdir = args.outputdir[0:-1]
     os.makedirs(args.outputdir, exist_ok=True)
-    adata = run_leiden(adata, n_cluster=args.nclusters, use_rep="embeddings", key_added="LeidenClusters")
 
     adata.write_h5ad(args.outputdir + "/adata_output.h5ad")
     pd.DataFrame(adata.X, index=adata.obs_names).to_csv(args.outputdir + "/embeddings_output.csv")
