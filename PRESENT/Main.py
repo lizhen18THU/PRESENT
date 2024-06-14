@@ -6,6 +6,7 @@ import torch
 import episcanpy.api as epi
 
 from .Model import *
+from .Utils import run_leiden
 
 def PRESENT_function(
         spatial_key: str="spatial",
