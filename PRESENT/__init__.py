@@ -1,4 +1,4 @@
-__version__ =  '0.1.6'
+__version__ =  '1.0.0'
 from .Utils import *
 from .Evaluation import *
 from .Main import *
