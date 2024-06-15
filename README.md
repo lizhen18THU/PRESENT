@@ -139,7 +139,7 @@ python3 PRESENT_BC_script.py --outputdir ./PRESENT_output --spatial_key spatial 
 + {--device}: Device used for training (cuda or cpu), default: cuda
 + {--device_id}: Which gpu to use for training
 
-## Find more details and tutorials of PRESENT on the [ReadTheDocs](https://bio-present.readthedocs.io/en/latest/) website.
+## Find more details and tutorials of PRESENT on the [Read the Docs](https://bio-present.readthedocs.io/en/latest/) website.
 
 ## Citation
 

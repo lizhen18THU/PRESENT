@@ -2,8 +2,10 @@ import argparse
 import pandas as pd
 import scanpy as sc
 import os
+import warnings
 from PRESENT import gene_sets_alignment, peak_sets_alignment
-from PRESENT import PRESENT_BC_function, run_leiden
+from PRESENT import PRESENT_BC_function
+warnings.filterwarnings("ignore")
 
 if __name__ == '__main__':
 

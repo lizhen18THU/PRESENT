@@ -1,7 +1,9 @@
 import argparse
 import pandas as pd
 import os
-from PRESENT import PRESENT_function, run_leiden
+import warnings
+from PRESENT import PRESENT_function
+warnings.filterwarnings("ignore")
 
 if __name__ == '__main__':
 

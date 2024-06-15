@@ -1,5 +1,3 @@
-
-   
  |PyPI| |PyPIDownloads| |Docs|
 
 
@@ -10,7 +8,7 @@
 .. |Docs| image:: https://readthedocs.org/projects/bio-present/badge/?version=latest
    :target: https://bio-present.readthedocs.io/en/latest/
    
-PRESENT: Cross-modality representation and multi-sample integration of spatially resolved transcriptomics
+Cross-modality representation and multi-sample integration of spatially resolved transcriptomics
 =====================
 
 .. toctree::
