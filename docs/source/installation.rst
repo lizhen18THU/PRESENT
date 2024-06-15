@@ -29,6 +29,8 @@ Installation via PyPI
 PRESENT is available on PyPI here_ and can be installed via::
 
     pip install bio-present
+    pip install pyg_lib==0.2.0 torch_sparse==0.6.17 torch_cluster==1.6.1 torch_scatter==2.1.1 -f https://data.pyg.org/whl/torch-2.0.0+cu118.html
+    
 
 Installation via GitHub
 ----
@@ -38,5 +40,6 @@ PRESENT can also installed from GitHub via::
     git clone https://github.com/lizhen18THU/PRESENT.git
     cd PRESENT
     python setup.py install
+    pip install pyg_lib==0.2.0 torch_sparse==0.6.17 torch_cluster==1.6.1 torch_scatter==2.1.1 -f https://data.pyg.org/whl/torch-2.0.0+cu118.html
 
 .. _here: https://pypi.org/project/bio-present
