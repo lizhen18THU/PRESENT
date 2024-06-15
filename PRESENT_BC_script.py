@@ -27,6 +27,7 @@ if __name__ == '__main__':
     parser.add_argument('--lr', type=int, default=0.001, help='Initial learning rate')
     parser.add_argument('--batch_size', type=int, default=320, help='Batch size for training')
     parser.add_argument('--device', type=str, default='cuda', help='Device used for training')
+    parser.add_argument('--device_id', type=int, default=0, help='Which gpu is used for training')
 
     args = parser.parse_args()
     adata_rna = adata_atac = adata_adt = None
@@ -81,7 +82,8 @@ if __name__ == '__main__':
         epochs = args.epochs,
         lr = args.lr,
         batch_size = args.batch_size,
-        device = args.device
+        device = args.device,
+        device_id = args.device_id
     )
     if args.outputdir.endswith("/"): args.outputdir = args.outputdir[0:-1]
     os.makedirs(args.outputdir, exist_ok=True)

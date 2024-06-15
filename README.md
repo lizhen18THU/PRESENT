@@ -31,7 +31,7 @@ torch-geometric==2.3.1
 ```
 
 ### Installation via pypi
-PRESENT is available on PyPI [here](https://pypi.org/project/bio-past) and can be installed via
+PRESENT is available on PyPI [here](https://pypi.org/project/bio-present) and can be installed via
 ```
 pip install bio-present
 pip install pyg_lib==0.2.0 torch_sparse==0.6.17 torch_cluster==1.6.1 torch_scatter==2.1.1 -f https://data.pyg.org/whl/torch-2.0.0+cu118.html
@@ -133,7 +133,8 @@ python3 PRESENT_BC_script.py --outputdir ./PRESENT_output --spatial_key spatial 
 + {--epochs}: Max epochs to train the model, default: 100
 + {--lr}: Initial learning rate, default: 0.001
 + {--batch_size}: Batch size for training, default: 320
-+ {--device}: Device used for training, default: cuda
++ {--device}: Device used for training (cuda or cpu), default: cuda
++ {--device_id}: Which gpu to use for training
 
 ## Citation
 
