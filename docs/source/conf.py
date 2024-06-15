@@ -63,7 +63,8 @@ exclude_patterns = []
 html_theme = "sphinx_rtd_theme"
 
 
-html_theme_options = dict(navigation_depth=4, logo_only=False)  # Only show the logo
+html_theme_options = dict(navigation_depth=4, logo_only=True)  # Only show the logo
+html_logo = "PRESENT_LOGO.png"
 
 # Add any paths that contain custom static files (such as style sheets) here,
 # relative to this directory. They are copied after the builtin static files,
