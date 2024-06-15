@@ -7,8 +7,8 @@
    :target: https://pypi.org/project/bio-present
 .. |PyPIDownloads| image:: https://static.pepy.tech/badge/bio-present
    :target: https://pepy.tech/project/bio-present
-.. |Docs| image:: https://readthedocs.org/projects/present/badge/?version=latest
-   :target: https://present.readthedocs.io/en/latest/
+.. |Docs| image:: https://readthedocs.org/projects/bio-present/badge/?version=latest
+   :target: https://bio-present.readthedocs.io/en/latest/
    
 PRESENT: Cross-modality representation and multi-sample integration of spatially resolved transcriptomics
 =====================

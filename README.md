@@ -1,6 +1,6 @@
 [![PyPI](https://img.shields.io/pypi/v/bio-present.svg)](https://pypi.org/project/bio-present)
 [![Downloads](https://static.pepy.tech/badge/bio-present)](https://pepy.tech/project/bio-present)
-[![Documentation Status](https://readthedocs.org/projects/present/badge/?version=latest)](https://present.readthedocs.io/en/latest/)
+[![Documentation Status](https://readthedocs.org/projects/bio-present/badge/?version=latest)](https://bio-present.readthedocs.io/en/latest/)
 # Cross-modality representation and multi-sample integration of spatially resolved omics data
 
 ## Overview
