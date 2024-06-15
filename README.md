@@ -139,6 +139,8 @@ python3 PRESENT_BC_script.py --outputdir ./PRESENT_output --spatial_key spatial 
 + {--device}: Device used for training (cuda or cpu), default: cuda
 + {--device_id}: Which gpu to use for training
 
+## Find more details and tutorials of PRESENT on the [ReadTheDocs](https://bio-present.readthedocs.io/en/latest/) website.
+
 ## Citation
 
 Zhen Li, Xuejian Cui, Xiaoyang Chen, Zijing Gao, Yuyao Liu, Yan Pan, Shengquan Chen and Rui Jiang. "Cross-modality representation and multi-sample integration of spatially resolved omics data." Preprint at bioRxiv https://doi.org/10.1101/2024.06.10.598155 (2024).
