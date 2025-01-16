@@ -1,18 +1,22 @@
 import argparse
 import pandas as pd
+import scanpy as sc
 import os
 import warnings
+from PRESENT import gene_sets_alignment, peak_sets_alignment
 from PRESENT import PRESENT_function
 warnings.filterwarnings("ignore")
 
 if __name__ == '__main__':
 
-    parser = argparse.ArgumentParser(description='PRESENT-RE: Cross-modality representation of spatially resolved omics data')
+    parser = argparse.ArgumentParser(description='PRESENT: Cross-modality representation and multi-sample integration of spatially resolved omics data')
     parser.add_argument('--outputdir', type=str, default='./PRESENT_output', help='The output dir for PRESENT')
     parser.add_argument('--spatial_key', type=str, default='spatial', help='adata_rna/adata_atac/adata_adt.obsm key under which to load the spatial matrix of spots')
-    parser.add_argument('--adata_rna_path', type=str, default=None, help='The path to RNA raw count matrix of spots in anndata.AnnData format')
-    parser.add_argument('--adata_atac_path', type=str, default=None, help='The path to ATAC raw fragment count matrix of spots in anndata.AnnData format')
-    parser.add_argument('--adata_adt_path', type=str, default=None, help='The path to ADT raw count matrix of spots in anndata.AnnData format')
+    parser.add_argument('--batch_key', type=str, default=None, help='adata_rna/adata_atac/adata_adt.obsm key under which to load the batch indices of spots')
+    parser.add_argument('--adata_rna_path', type=str, nargs='*', default=[], help='The path to RNA raw count matrices of spots in anndata.AnnData format')
+    parser.add_argument('--adata_atac_path', type=str, nargs='*', default=[], help='The path to ATAC raw fragment count matrices of spots in anndata.AnnData format')
+    parser.add_argument('--adata_adt_path', type=str, nargs='*', default=[], help='The path to ADT raw count matrices of spots in anndata.AnnData format')
+
     parser.add_argument('--rdata_rna_path', type=str, default=None, help='The path to RNA raw counts of reference data in anndata.AnnData format')
     parser.add_argument('--rdata_rna_anno', type=str, default=None, help='rdata_rna.obs key under which to load the annotation')
     parser.add_argument('--rdata_atac_path', type=str, default=None, help='The path to ATAC raw fragment counts of reference data in anndata.AnnData format')
@@ -27,6 +31,8 @@ if __name__ == '__main__':
     parser.add_argument('--num_hvg', type=int, default=3000, help='Number of highly variable genes to select for RNA data')
     parser.add_argument('--d_lat', type=int, default=50, help='The latent dimension of final embeddings')
     parser.add_argument('--k_neighbors', type=int, default=6, help='Number of neighbors for each spot to construct graph')
+    parser.add_argument('--intra_neighbors', type=int, default=6, help='Number of intra_neighbors for each spot to construct cross-sample graph')
+    parser.add_argument('--inter_neighbors', type=int, default=6, help='Number of inter_neighbors for each spot to construct cross-sample graph')
     parser.add_argument('--epochs', type=float, default=100, help='Max epochs to train the model')
     parser.add_argument('--lr', type=int, default=0.001, help='Initial learning rate')
     parser.add_argument('--batch_size', type=int, default=320, help='Batch size for training')
@@ -34,13 +40,47 @@ if __name__ == '__main__':
     parser.add_argument('--device_id', type=int, default=0, help='Which gpu is used for training')
 
     args = parser.parse_args()
+    adata_rna = adata_atac = adata_adt = None
 
+    if len(args.adata_rna_path)==1: 
+        adata_rna = sc.read_h5ad(args.adata_rna_path[0])
+    elif len(args.adata_rna_path)>1: 
+        assert args.batch_key is not None, "Please specify the batch_key"
+        adata_rna_list = []
+        for path in args.adata_rna_path:
+            adata_rna_list.append(sc.read_h5ad(path))
+        adata_rna_list = gene_sets_alignment(adata_rna_list)
+        adata_rna = adata_rna_list[0].concatenate(adata_rna_list[1:])
+        adata_rna.obs[args.batch_key] = adata_rna.obs["batch"]
+
+    if len(args.adata_atac_path)==1: 
+        adata_atac = sc.read_h5ad(args.adata_atac_path[0])
+    elif len(args.adata_atac_path)>1: 
+        assert args.batch_key is not None, "Please specify the batch_key"
+        adata_atac_list = []
+        for path in args.adata_atac_path:
+            adata_atac_list.append(sc.read_h5ad(path))
+        adata_atac_list = peak_sets_alignment(adata_atac_list)
+        adata_atac = adata_atac_list[0].concatenate(adata_atac_list[1:])
+        adata_atac.obs[args.batch_key] = adata_atac.obs["batch"]
+    
+    if len(args.adata_adt_path)==1: 
+        adata_adt = sc.read_h5ad(args.adata_adt_path[0])
+    elif len(args.adata_adt_path)>1: 
+        assert args.batch_key is not None, "Please specify the batch_key"
+        adata_adt_list = []
+        for path in args.adata_adt_path:
+            adata_adt_list.append(sc.read_h5ad(path))
+        adata_adt_list = gene_sets_alignment(adata_adt_list)
+        adata_adt = adata_adt_list[0].concatenate(adata_adt_list[1:])
+        adata_adt.obs[args.batch_key] = adata_adt.obs["batch"]
 
     adata = PRESENT_function(
         args.spatial_key, 
-        adata_rna = args.adata_rna_path,
-        adata_atac = args.adata_atac_path,
-        adata_adt = args.adata_adt_path,
+        batch_key = args.batch_key,
+        adata_rna = adata_rna,
+        adata_atac = adata_atac,
+        adata_adt = adata_adt,
         rdata_rna = args.rdata_rna_path,
         rdata_rna_anno = args.rdata_rna_anno,
         rdata_atac = args.rdata_atac_path,
@@ -55,6 +95,8 @@ if __name__ == '__main__':
         nclusters = args.nclusters,
         d_lat = args.d_lat,
         k_neighbors = args.k_neighbors,
+        intra_neighbors = args.intra_neighbors,
+        inter_neighbors = args.inter_neighbors,
         epochs = args.epochs,
         lr = args.lr,
         batch_size = args.batch_size,

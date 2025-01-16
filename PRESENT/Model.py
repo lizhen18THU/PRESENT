@@ -8,7 +8,7 @@ from sklearn.neighbors import kneighbors_graph
 import torch_geometric
 from torch_geometric.loader import ClusterData, ClusterLoader
 
-class PRESENT(nn.Module):
+class PRESENT_RP(nn.Module):
     def __init__(
         self, 
         rna_dim: Optional[int] = None, 
@@ -817,5 +817,4 @@ class PRESENT_BC(nn.Module):
         self.freeze()
         joint_lat, omics_lat, omics_imputed = self.inner_inference(undirected_geo.edge_index, rna_norm, cas_norm, adt_norm, impute=impute, batch_fusion=True)
         
-        return joint_lat, omics_lat, omics_imputed    
-    
+        return joint_lat, omics_lat, omics_imputed
