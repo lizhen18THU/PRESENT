@@ -14,6 +14,8 @@ Spatially resolved sequencing technologies have revolutionized our understanding
 
 ## Installation
 
+On a regular personal computer (e.g., PC equipped with an AMD 3800X CPU, a NVIDIA 2080Ti GPU and 64GB of RAM), the installation typically takes approximately 20 to 30 minutes.
+
 ### Dependencies
 ```
 numpy==1.24.4
@@ -62,7 +64,7 @@ Suppose we have a spatial RNA-ATAC co-profiling data, where the RNA and ATAC raw
 python3 run_PRESENT_script.py --outputdir ./PRESENT_output --spatial_key spatial --adata_rna_path data/adata_rna.h5ad --gene_min_cells 1  --num_hvg 3000 --adata_atac_path data/adata_atac.h5ad --peak_min_cells_fraction 0.03 --nclusters 10 
 ```
 
-Similarly, for spatial RNA-ADT co-profiling data, the command denotes
+Similarly, for spatial RNA-ADT co-profiling data (demo spatial RNA-ADT data, i.e., the 10x Genomics spatial RNA-ADT human lymph node data, is provided in data directory), the command denotes
 ```
 python3 run_PRESENT_script.py --outputdir ./PRESENT_output --spatial_key spatial --adata_rna_path data/adata_rna.h5ad --gene_min_cells 1  --num_hvg 3000 --adata_adt_path data/adata_adt.h5ad --protein_min_cells 1 --nclusters 10 
 ```
