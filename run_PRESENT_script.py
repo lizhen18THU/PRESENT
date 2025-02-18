@@ -8,7 +8,7 @@ from PRESENT import PRESENT_function
 warnings.filterwarnings("ignore")
 
 if __name__ == '__main__':
-
+    
     parser = argparse.ArgumentParser(description='PRESENT: Cross-modality representation and multi-sample integration of spatially resolved omics data')
     parser.add_argument('--outputdir', type=str, default='./PRESENT_output', help='The output dir for PRESENT')
     parser.add_argument('--spatial_key', type=str, default='spatial', help='adata_rna/adata_atac/adata_adt.obsm key under which to load the spatial matrix of spots')
