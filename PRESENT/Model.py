@@ -192,11 +192,11 @@ class PRESENT_RP(nn.Module):
 
         # normalization and get prior weight
         if self.is_rna:
-            sdata = sc.AnnData(rna_counts)
+            sdata = sc.AnnData(rna_counts.copy())
             sc.pp.normalize_total(sdata)
             sc.pp.log1p(sdata)
             if ref_rna_counts is not None:
-                rdata = sc.AnnData(ref_rna_counts)
+                rdata = sc.AnnData(ref_rna_counts.copy())
                 sc.pp.normalize_total(rdata)
                 sc.pp.log1p(rdata)
                 if ref_rna_anno is not None:
@@ -212,10 +212,10 @@ class PRESENT_RP(nn.Module):
         else:
             rna_prior = rna_norm = rna_libsize = None
         if self.is_cas:
-            sdata = sc.AnnData(cas_counts)
+            sdata = sc.AnnData(cas_counts.copy())
             sdata.X = TFIDF(sdata.X.T).T.copy()
             if ref_cas_counts is not None:
-                rdata = sc.AnnData(ref_cas_counts)
+                rdata = sc.AnnData(ref_cas_counts.copy())
                 rdata.X = TFIDF(rdata.X.T).T.copy()
                 if ref_cas_anno is not None:
                     rdata.obs["anno"] = np.array(ref_cas_anno)
@@ -230,12 +230,12 @@ class PRESENT_RP(nn.Module):
         else:
             cas_prior = cas_norm = cas_libsize = None
         if self.is_adt:
-            sdata = sc.AnnData(adt_counts)
+            sdata = sc.AnnData(adt_counts.copy())
             X_clred, gmean_list = CLR_transform(sdata.X)
             sdata.X = X_clred
             sc.pp.scale(sdata)
             if ref_adt_counts is not None:
-                rdata = sc.AnnData(ref_adt_counts)
+                rdata = sc.AnnData(ref_adt_counts.copy())
                 X_clred, gmean_list = CLR_transform(rdata.X)
                 rdata.X = X_clred
                 sc.pp.scale(rdata)
@@ -538,11 +538,11 @@ class PRESENT_BC(nn.Module):
         
         # normalization and get prior weight
         if self.is_rna:
-            sdata = sc.AnnData(rna_counts)
+            sdata = sc.AnnData(rna_counts.copy())
             sc.pp.normalize_total(sdata)
             sc.pp.log1p(sdata)
             if ref_rna_counts is not None:
-                rdata = sc.AnnData(ref_rna_counts)
+                rdata = sc.AnnData(ref_rna_counts.copy())
                 sc.pp.normalize_total(rdata)
                 sc.pp.log1p(rdata)
                 if ref_rna_anno is not None:
@@ -558,10 +558,10 @@ class PRESENT_BC(nn.Module):
         else:
             rna_prior = rna_norm = rna_libsize = None
         if self.is_cas:
-            sdata = sc.AnnData(cas_counts)
+            sdata = sc.AnnData(cas_counts.copy())
             sdata.X = TFIDF(sdata.X.T).T.copy()
             if ref_cas_counts is not None:
-                rdata = sc.AnnData(ref_cas_counts)
+                rdata = sc.AnnData(ref_cas_counts.copy())
                 rdata.X = TFIDF(rdata.X.T).T.copy()
                 if ref_cas_anno is not None:
                     rdata.obs["anno"] = np.array(ref_cas_anno)
@@ -576,12 +576,12 @@ class PRESENT_BC(nn.Module):
         else:
             cas_prior = cas_norm = cas_libsize = None
         if self.is_adt:
-            sdata = sc.AnnData(adt_counts)
+            sdata = sc.AnnData(adt_counts.copy())
             X_clred, gmean_list = CLR_transform(sdata.X)
             sdata.X = X_clred
             sc.pp.scale(sdata)
             if ref_adt_counts is not None:
-                rdata = sc.AnnData(ref_adt_counts)
+                rdata = sc.AnnData(ref_adt_counts.copy())
                 X_clred, gmean_list = CLR_transform(rdata.X)
                 rdata.X = X_clred
                 sc.pp.scale(rdata)
